@@ -1,0 +1,23 @@
+#!/bin/bash
+
+JUST_A_SECOND=1
+Fun ()
+{
+    i=0
+    REPEATS=3
+
+    echo
+    echo "This is from the function: Fun "
+    echo
+
+    while [ $i -lt $REPEATS ]
+    do
+        echo "iteration number : $i"
+        echo "<----------FUNCTIONS ARE FUN ---------->"
+        echo 
+        let "i+=1"
+    done
+}
+
+echo "This script demonstrates the functions in shell scripting"
+Fun

@@ -1,0 +1,18 @@
+#%Module1.0#####################################################################
+##
+## module matlab
+##
+##
+proc ModulesHelp { } {
+        global version prefix
+}
+
+module-whatis   "Loads the matlab"
+
+# for Tcl script use only
+set     version         8.1
+set     prefix          /Applications/MATLAB_R2013a.app
+set     exec_prefix     ${prefix}
+set     datarootdir     ${prefix}
+
+prepend-path    PATH            ${exec_prefix}/bin

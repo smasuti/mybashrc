@@ -1,0 +1,28 @@
+#%Module1.0#####################################################################
+##
+## module octave
+##
+##
+proc ModulesHelp { } {
+        global version octave 
+}
+
+module-whatis	"octave : Software similar to matlab."
+
+# for Tcl script use only
+set     version         1.0.3
+set     prefix          /usr/local/octave/3.8.0/
+set     exec_prefix     ${prefix}
+set     datarootdir     ${prefix}
+
+if { [ module-info mode load ] } {
+	if { [ is-loaded "ports" ] } { } else {
+		module load "ports"
+	}
+}
+
+prereq ports 
+
+prepend-path    PATH            ${exec_prefix}/bin
+prepend-path    MANPATH		${datarootdir}/man
+

@@ -1,0 +1,41 @@
+#%Module1.0#####################################################################
+##
+## module relax
+##
+##
+proc ModulesHelp { } {
+        global version prefix
+
+        puts stderr "\tmodules - loads the relax software & application environment"
+        puts stderr "\n\tThis adds $prefix/* to several of the"
+        puts stderr "\tenvironment variables."
+        puts stderr "\n\tVersion $version\n"
+}
+
+module-whatis	"Numerical models of tectonic and volcanic unrest. Forward calculations, post-processing and mapping tools."
+
+# for Tcl script use only
+set     version         1.0.3
+set     prefix          /Users/smasuti/src/relax
+set     exec_prefix     ${prefix}
+set     datarootdir     ${prefix}
+
+if { [ module-info mode load ] } {
+	if { [ is-loaded "fink" ] } { } else {
+		module load "fink"
+	}
+}
+
+if { [ module-info mode unload ] } {
+	if { [ is-loaded "fink" ] } { 
+		module unload "fink"
+	} else { }
+}
+
+prereq fink
+conflict ports
+
+prepend-path    PATH            ${exec_prefix}/util
+prepend-path    PATH            ${exec_prefix}/build
+prepend-path    MANPATH			${datarootdir}/man
+

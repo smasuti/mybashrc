@@ -1,0 +1,30 @@
+#%Module1.0#####################################################################
+##
+## modules modulefile
+##
+## modulefiles/modules.  Generated from modules.in by configure.
+##
+proc ModulesHelp { } {
+        global version prefix
+
+        puts stderr "\tmodules - loads the macport environment"
+        puts stderr "\n\tThis adds $prefix/* to several of the"
+        puts stderr "\tenvironment variables."
+        puts stderr "\n\tVersion $version\n"
+}
+
+module-whatis	"loads the macport environment"
+
+# for Tcl script use only
+set	version		0.34.4
+set	prefix		/opt
+set	exec_prefix	${prefix}
+set	datarootdir	${prefix}/share
+
+conflict fink
+
+setenv			MODULESHOME	 $prefix
+prepend-path    PATH   		 ${exec_prefix}/local/bin
+prepend-path    PATH   		 ${exec_prefix}/local/lib/gmt4/bin
+prepend-path    PATH   		 ${exec_prefix}/local/sbin
+prepend-path    LD_LIBRARY_PATH	 ${exec_prefix}/local/lib

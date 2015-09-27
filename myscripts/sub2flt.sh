@@ -1,0 +1,1 @@
+cat temp | awk '{print $2,$1,$3,$4,$5,$6,$7}' | proj +proj=utm +zone=47 | awk '{$1=($1+56748.29)/1e3;$2=($2-221910.44)/1e3;print $0}' | awk 'BEGIN{print "# n  slip      x1       x2         x3   length   width   strike  dip  rake"}{print NR,$4,$2,$1,$3,12.5,10,$6,$7,$5}' 

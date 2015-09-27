@@ -1,0 +1,37 @@
+#%Module1.0#####################################################################
+##
+## modules modulefile
+##
+## modulefiles/modules.  Generated from modules.in by configure.
+##
+proc ModulesHelp { } {
+        global version prefix
+
+        puts stderr "\tmodules - loads the modules software & application environment"
+        puts stderr "\n\tThis adds $prefix/* to several of the"
+        puts stderr "\tenvironment variables."
+        puts stderr "\n\tVersion $version\n"
+}
+
+module-whatis	"loads the Gamra environment"
+
+# for Tcl script use only
+set	version		0.34.4
+set	prefix		/Users/sbarbot/Documents/src
+set	exec_prefix	${prefix}
+set	datarootdir	${prefix}/share
+
+
+if { [ module-info mode load ] } {
+	if { [ is-loaded "fink" ] } { } else {
+		module load "fink"
+	}
+}
+
+prereq fink
+
+setenv		MODULESHOME	 	$prefix
+prepend-path    PATH   		 	${exec_prefix}/gamra/build/release:/Applications/ParaView\ 3.14.1.app/Contents/bin
+prepend-path    LD_LIBRARY_PATH	 	${exec_prefix}/muparser_v2_2_3-bin/lib
+prepend-path    DYLD_LIBRARY_PATH	${exec_prefix}/muparser_v2_2_3-bin/lib
+

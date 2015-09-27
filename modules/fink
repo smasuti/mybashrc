@@ -1,0 +1,36 @@
+#%Module1.0#####################################################################
+##
+## modules modulefile
+##
+## modulefiles/modules.  Generated from modules.in by configure.
+##
+proc ModulesHelp { } {
+        global version prefix
+
+        puts stderr "\tmodules - loads the modules software & application environment"
+        puts stderr "\n\tThis adds $prefix/* to several of the"
+        puts stderr "\tenvironment variables."
+        puts stderr "\n\tVersion $version\n"
+}
+
+module-whatis	"loads the fink environment"
+
+# for Tcl script use only
+set	version		0.34.4
+set	prefix		/sw
+set	exec_prefix	${prefix}
+set	datarootdir	${prefix}/share
+
+conflict ports
+
+setenv			MODULESHOME	 	$prefix
+prepend-path    PATH   		 	${exec_prefix}/local/bin
+prepend-path    PATH   		 	${exec_prefix}/bin
+prepend-path    LD_LIBRARY_PATH	 	${exec_prefix}/lib:${exec_prefix}/local/lib/netcdf-gfortran/lib
+#prepend-path    DYLD_LIBRARY_PATH	${exec_prefix}/lib:${exec_prefix}/local/lib/netcdf-gfortran/lib
+setenv          MANPATH		""
+prepend-path    MANPATH			${prefix}/share/man
+setenv          INFOPATH		${prefix}/share/info:/sw/info:/usr/share/info
+prepend-path    INFOPATH		${prefix}/share/info:/sw/info
+
+

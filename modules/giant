@@ -1,0 +1,31 @@
+#%Module1.0#####################################################################
+##
+## modules modulefile
+##
+## modulefiles/modules.  Generated from modules.in by configure.
+##
+proc ModulesHelp { } {
+        global version prefix
+
+        puts stderr "\tmodules - loads the giant software"
+}
+
+module-whatis	"loads the giant"
+
+# for Tcl script use only
+set	version	 	2.0.0	
+set	prefix		/Users/smasuti/src/insar/giant/GIAnT	
+set	exec_prefix	${prefix}
+set	datarootdir	${prefix}/share
+
+if { [ module-info mode load ] } {
+	if { [ is-loaded "ports" ] } { } else {
+		module load "ports"
+	}
+}
+
+prereq ports 
+conflict isce
+
+prepend-path 	PYTHONPATH  	${prefix}
+prepend-path    PATH        	${exec_prefix}/SCR

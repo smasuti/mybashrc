@@ -1,0 +1,51 @@
+#%Module1.0#####################################################################
+##
+## modules modulefile
+##
+## modulefiles/modules.  Generated from modules.in by configure.
+##
+proc ModulesHelp { } {
+        global version prefix
+
+        puts stderr "\tmodules - loads the modules software & application environment"
+        puts stderr "\n\tThis adds $prefix/* to several of the"
+        puts stderr "\tenvironment variables."
+        puts stderr "\n\tVersion $version\n"
+}
+
+module-whatis	"loads the ROI_PAC environment"
+
+# for Tcl script use only
+set	version		0.34.4
+set	prefix		/sw
+set	exec_prefix	${prefix}
+set	datarootdir	${prefix}/share
+
+
+setenv		MODULESHOME	 	$prefix
+prepend-path    PATH   		 	${exec_prefix}/local/bin
+prepend-path    PATH   		 	${exec_prefix}/bin
+prepend-path    LD_LIBRARY_PATH	 	${exec_prefix}/lib:${exec_prefix}/local/lib/netcdf-gfortran/lib
+prepend-path    DYLD_LIBRARY_PATH	${exec_prefix}/lib:${exec_prefix}/local/lib/netcdf-gfortran/lib
+setenv           MANPATH		""
+prepend-path    MANPATH			${prefix}/share/man
+setenv          INFOPATH		${prefix}/share/info:/sw/info:/usr/share/info
+prepend-path    INFOPATH		${prefix}/share/info:/sw/info
+
+# ERS DATA
+setenv SAR_PRC_DIR		/usr/data/orbits/ERS/PRC
+setenv SAR_ODR_DIR		/usr/data/orbits/Delft
+
+# ENVISAT DATA
+setenv 		POR_DIR 	/usr/data/orbits/Envisat/Doris
+setenv 		VOR_DIR 	/usr/data/orbits/Envisat/Doris
+setenv 		INS_DIR 	/usr/data/orbits/Envisat/ASA_INS
+
+# for ROI_PAC
+setenv 		INT_BIN 	/Users/sbarbot/Documents/src/roi_pac/ROI_PAC_3_0_1/ROI_PAC/INT_BIN
+setenv 		INT_SCR 	/Users/sbarbot/Documents/src/roi_pac/ROI_PAC_3_0_1/ROI_PAC/INT_SCR
+setenv 		FFTW_LIB_DIR 	/sw/lib
+setenv		FFTW_INC_DIR 	/sw/include/
+prepend-path	PATH 		$INT_BIN:$INT_SCR
+
+

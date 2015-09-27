@@ -1,0 +1,9 @@
+#!/bin/bash
+
+day=20000101 # start date
+end=20000301
+
+until [[ $day > $end ]]; do
+    printf "$day \n"
+    day=$(date -d "$day + 1 day" +"%Y%m%d")
+done

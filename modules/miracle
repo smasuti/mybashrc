@@ -1,0 +1,38 @@
+#%Module1.0#####################################################################
+##
+## module relax
+##
+##
+proc ModulesHelp { } {
+        global version prefix
+
+        puts stderr "\tmodules - loads the miracle software & application environment"
+        puts stderr "\n\tThis adds $prefix/* to several of the"
+        puts stderr "\tenvironment variables."
+        puts stderr "\n\tVersion $version\n"
+}
+
+module-whatis	"Miracle is mpi based inverse modelling software which uses relax for forward modelling"
+
+# for Tcl script use only
+set     version         1.0.3
+set     prefix          /Users/smasuti/src/miracle
+set     exec_prefix     ${prefix}
+set     datarootdir     ${prefix}
+
+if { [ module-info mode load ] } {
+	if { [ is-loaded "fink" ] } { } else {
+		module load "fink"
+	}
+}
+
+if { [ module-info mode unload ] } {
+	if { [ is-loaded "fink" ] } { 
+		module unload "fink"
+	} else { }
+}
+
+prereq fink
+conflict ports 
+
+prepend-path    PATH            ${exec_prefix}/bin

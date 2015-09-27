@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "----- Testing the positional parameters -----"
+
+echo "Number of arguments passed to this program are :" 
+echo "$#"
+
+echo "The first argument passed from command line is :" 
+echo "$1"
+
+echo "$2"
+
+echo "All the command line arguments are :"
+echo "$*"
+

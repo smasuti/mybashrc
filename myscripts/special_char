@@ -1,0 +1,24 @@
+#!/bin/bash
+echo ""
+
+echo "This script demonstrates some special characters in shell scripting"
+
+echo ""
+
+echo "This is " ; echo "created using echo with special character ; "
+
+echo ""
+
+if [[ -f ./special_character ]] ; 
+then : 
+else
+    echo "The file special character doesnt exists. Did u mean special_char ? "
+fi
+echo ""
+
+echo "$ is used for varaibles such as PATH, SHELL " 
+echo "The SHELL you are using is : $SHELL"
+echo ""
+
+echo "The exit status of previous command is : $?"
+echo ""

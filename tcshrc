@@ -1,0 +1,74 @@
+if ($?tcsh) then
+  set modules_shell="tcsh"
+else
+  set modules_shell="csh"
+endif
+
+setenv MODULESHOME /Users/smasuti/mysoft/tcl
+
+if ( ! $?TCLSH ) then
+   if ( -f /usr/bin/tclsh ) then
+      set TCLSH="/usr/bin/tclsh"
+   else
+      if ( -f /bin/tclsh ) then
+         set TCLSH="/bin/tclsh"
+      else
+         set TCLSH=""
+      endif
+   endif
+endif
+
+if ( $?histchars ) then
+  set _histchars = $histchars
+  if ($?prompt) then
+    alias module 'unset histchars;set _prompt="$prompt";eval `'$TCLSH /Users/smasuti/mysoft/tcl'/modulecmd.tcl $modules_shell \!*`;set histchars = $_histchars; set prompt="$_prompt";unset _prompt'
+  else
+  alias module 'unset histchars;eval `'$TCLSH /Users/smasuti/mysoft/tcl'/modulecmd.tcl $modules_shell \!*`;set histchars = $_histchars'
+  endif
+else
+  if ($?prompt) then
+    alias module 'set _prompt="$prompt";set prompt="";eval `'$TCLSH /Users/smasuti/mysoft/tcl'/modulecmd.tcl $modules_shell \!*`;set prompt="$_prompt";unset _prompt'
+else
+  alias module 'eval `'$TCLSH /Users/smasuti/mysoft/tcl'/modulecmd.tcl $modules_shell \!*`'
+  endif
+endif
+
+
+set autolist
+source /Users/smasuti/mysoft/tcl/init/modulerc
+
+source /usr/local/GMTSAR/gmtsar_config
+
+if (-e ~/.aliases.sh) then
+	source ~/.aliases.sh
+endif
+
+
+
+alias c clear
+alias as aliaser show
+alias clone git clone git@git.assembla.com:relax_cuda.git
+alias miracle git clone https://sagar_masuti@bitbucket.org/sagar_masuti/miracle.git
+alias drop cd /Users/smasuti/Documents/EOS/dropbox
+alias e exit
+alias ep echo $PATH
+alias esclass  cd ~/Documents/EOS/dropbox/es7008/
+alias h cd ~
+alias komodo ssh -Y smasuti@155.69.57.65
+alias krakatoa  ssh sbarbot@krakatoa.staff.main.ntu.edu.sg
+alias ma module avail
+alias matlab matlab -nojvm -nodisplay -nosplash
+alias mfink module load fink
+alias ml module list
+alias mol module load
+alias mul module unload
+alias nvid cd /Developer/NVIDIA/CUDA-5.5/samples/mine/
+alias pdcc ssh -Y smasuti@155.69.144.19
+alias rc vi ~/.bashrc
+alias s source ~/.bashrc
+alias scrooge ssh smasuti@scrooge.sce.ntu.edu.sg
+alias ufink module unload fink
+
+alias setprompt 'set prompt="{whoami\%!}$cwd: "'
+setprompt
+alias cd 'cd !*; setprompt'

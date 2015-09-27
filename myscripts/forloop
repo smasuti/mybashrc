@@ -1,0 +1,20 @@
+#!/bin/bash
+
+NAMES="Sylvain
+Sagar
+Marta
+SengAn
+Deepa"
+
+echo ""
+echo "The team is : Earthquake physics "
+echo "The team members are : "
+
+for name in $NAMES 
+do 
+    echo "$name"
+    continue
+    echo "soemthing"
+    echo ""
+done
+echo ""

@@ -1,0 +1,23 @@
+#%Module1.0#####################################################################
+##
+## module petsc
+##
+##
+proc ModulesHelp { } {
+        global version prefix
+
+        puts stderr "\tmodules - loads the petsc software & application environment"
+        puts stderr "\n\tThis adds $prefix/* to several of the"
+        puts stderr "\tenvironment variables."
+        puts stderr "\n\tVersion $version\n"
+}
+
+module-whatis	"Numerical models of tectonic and volcanic unrest. Forward calculations, post-processing and mapping tools."
+
+# for Tcl script use only
+set     version         1.0.3
+set		prefix			/Users/smasuti/src/petsc
+set     exec_prefix     ${prefix}
+set     datarootdir     ${prefix}
+
+setenv	PETSC_DIR	${prefix}
