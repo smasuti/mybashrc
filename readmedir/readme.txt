@@ -177,6 +177,7 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
 
 54) Printing the last line of relax output or status of miracle.
     for i in relax_*; do printf $i; tail $i/ABGS.ned | sed -n 10p; done
+    for i in relax_*; do tail $i/ABGS.ned | sed -n 10p| awk -v n=$i '{if(1.0>$1){print n, $1}}'; done
 
 55) Counting number characters in latex document.
     texcount -char abstract.tex
@@ -185,4 +186,43 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
 
 56) Getting best fit before miracle finishes. 
     cat ~/26322.komodo.des.OU | grep in.param | awk '{print $2,$3,$4,$1}' | sort
+
+57) Checking how many nodes are free on komodo.
+    qnodes | grep "state = free" | wc
+
+58) Sending message to the other user logged in.
+    write username tty
+
+59) Split in awk example.
+    for i in *.txt; do echo $i | awk '{split($0,a,"_");print "mv " $0 " "a[1]"-relax.dat"}'; done
+
+60) Opening multiple files each on different process.
+    for i in relax_000?; do gv $i/fit.pdf >& /dev/null & done
+
+61) cut with more than one field.
+    echo "benchmark_128_1000_1000_1year_prestress" | cut -d"_" --fields=3,4,6
+
+62) login to specific node in komodo.
+    qsub -q q24 -l nodes=1:ppn=24,walltime=10:00:00:00 -I
+
+63) getting the data from the -relax.ned file
+    for i in *-relax.ned; do tail $i | sed -n 10p | awk '{printf("%12.4e %12.4e %12.4e %12.4e\n",$2,$3,$4,$5);}'; done
+
+64) getting the age for plotting the profile.
+    echo ""| awk '{for(x=-1400;x<=1400;x=x+1){print x,0;}}' | grdtrack  -Gage.3.2_km.grd  | grdtrack -Gsum_slab1.0_clip_km.grd | awk '{for(z=0;z<=200;z=z+1){if(substr($4,0,3)!="NaN"){printf("%f %f %f\n",$1,z+$4,$3)}else{printf("%f %f %f\n",$1,z,$3)}}}' > temp.xyz
+    xyz2grd temp.xyz -Gprofile.grd -I1/1 -R-1400/1400/0/380
+    grdmap.sh -b -1400/1400/0/200 -p 45/100/1 -c seis profile.grd
+
+65) git on komodo if it gives error about the requester URL returned error
+    then in .git/config replace url https with following
+    ssh://git
+
+66) Opening 10 best models of relax using gv in komodo.
+    cat stdout | grep in.param | awk '{print $2,$1}' | sort -g | head | awk '{print "gv relax_"substr($2,10,4)".pdf"}' | sh
+
+67) Cleaning the -relax.ned files on komodo.
+    for i in miracle_1*; do for j in $i/relax_*; do rm $j/*-relax.ned;done;done
+
+68) Checking for number of files in a directory.
+    find .//. ! -name . -print | grep -c //
 

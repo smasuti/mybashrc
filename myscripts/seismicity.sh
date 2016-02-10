@@ -25,6 +25,9 @@ Description:
      (-m option).  
      date format = yyyy-mm-dd
      If the region and the magnitude are not specified default values are used.
+
+Examples:
+     seismicity.sh -r 119/123/21/26 -s 1960-01-01 -e 2016-02-06
 ----
 seismicity 1.0
 Copyright (C) 2015 Sagar Masuti

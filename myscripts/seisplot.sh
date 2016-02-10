@@ -62,10 +62,19 @@ evlo=`saclst evlo f $first | awk '{print $2}'`
 evdp=`saclst evdp f $first | awk '{print $2}'`
 
 station=sta.ps
-minx=`echo $range | cut -d"/" -f 1`
-maxx=`echo $range | cut -d"/" -f 2`
-miny=`echo $range | cut -d"/" -f 3`
-maxy=`echo $range | cut -d"/" -f 4`
+
+if [ "$stname" == "" ] ; then
+    minx=`echo $range | cut -d"/" -f 1`
+    maxx=`echo $range | cut -d"/" -f 2`
+    miny=`echo $range | cut -d"/" -f 3`
+    maxy=`echo $range | cut -d"/" -f 4`
+else
+    dis=`saclst dist f *.$stname.* | awk '{print $2}'`
+    minx=`echo $range | cut -d"/" -f 1`
+    maxx=`echo $range | cut -d"/" -f 2`
+    miny=
+    maxy=`saclst dist f *.$stname.* | awk '{print $2+100}'`
+fi
 
 if [ "$filter" == "" ]; then
     filmin1=0.02
@@ -79,17 +88,36 @@ else
     filmax2=`echo $filter | cut -d"-" -f 4`
 fi
 
-thdist=200
+thdist=50
 plotdir="plotdir"
 mkdir -p $plotdir
 
 if [ "$stname" != "" ] ; then
     saclst stla stlo dist az f $stname > sta.lst
-    # plot for the station alone and ta ta bye bye
+    cp *.$stname.* $plotdir/
+    sac << EOF
+    r plotdir/*.z
+    rtr
+    rmean
+    int
+    bp c ${filmin1} ${filmax1} n 4 p 2
+    rtr
+    rmean
+    w over
+    r plotdir/*.[rt]
+    rtr
+    rmean
+    int
+    bp c ${filmin2} ${filmax2} n 4 p 2
+    rtr
+    rmean
+    w over
+    q
+EOF
 else
     j=0
     predist=$miny
-    declare -a f=(*.10.t)
+    declare -a f=(*.t)
     if [ "$debug" == "true" ]; then 
         echo "Number of files to process: ${#f[*]}"
     fi
@@ -114,7 +142,7 @@ else
                     stalat=`saclst stla f ${f[i]} | awk '{print $2}'`
                     stalon=`saclst stlo f ${f[i]} | awk '{print $2}'`
                     x=$(echo "$maxx+20" | bc -q)
-                    echo "$stalon $stalat 10 0 0 5 $sta" >> $plotdir/sta.lst
+                    echo "$x $dist 10 0 0 5 $sta" >> $plotdir/sta.lst
                     #if [ "$j" == "0" ]; then
                         #newminx=$(echo "$minx+($dist/10)" | bc -q)
                     #fi
@@ -148,12 +176,13 @@ EOF
 fi
 
 # Plotting the stations 
-pscoast -Rg -JE${evlo}/${evla}/90/6i -B0 -Dc -Ggray -A5000 -Wthinnest -K  > $station
-echo $evlo $evla | psxy -J -R -Sa0.5 -Gred -K -O >> ${station}
-gmtset ELLIPSOID Sphere
-awk '{print $1,$2}' $plotdir/sta.lst | psxy -R -J -St0.3 -G${colors[3]} -W0p -K -O >> ${station}
-awk '{print $0}' $plotdir/sta.lst | pstext -O -K  -R -J -P -G50/50/225 -D0.2c/0 >> ${station}
-
+if [ "$stname" == "" ] ; then
+    pscoast -Rg -JE${evlo}/${evla}/90/6i -B0 -Dc -Ggray -A5000 -Wthinnest -K  > $station
+    echo $evlo $evla | psxy -J -R -Sa0.5 -Gred -K -O >> ${station}
+    gmtset ELLIPSOID Sphere
+    awk '{print $1,$2}' $plotdir/sta.lst | psxy -R -J -St0.3 -G${colors[3]} -W0p -K -O >> ${station}
+    awk '{print $0}' $plotdir/sta.lst | pstext -O -K  -R -J -P -G50/50/225 -D0.2c/0 >> ${station}
+fi
 if [ "$phase" != "" ] ; then
     n=`echo $phase | awk '{n=split($1,a,"-");print n}'`
     for (( j=1; j <= n; j++ ))
@@ -174,9 +203,12 @@ right=3
 psbasemap -JX4i/7i -R$minx/$maxx/$miny/$maxy -Ba500f100:"Time (s)"::."Vertical \
 component":/a500f100:"Distance (km)":nSWe -K -X$right \
 > ${outfile}.ps 
-pssac2 -JX -R -Ekt-1 -M$scaling/0 plotdir/*.z -W0.5p/blue -K -O \
+pssac2 -JX -R -Ekt-1 -M$scaling/0 $plotdir/*.z -W0.5p/blue -K -O \
 >> ${outfile}.ps
-cat $plotdir/sta.lst | pstext -JX -R -O -K -N >> ${outfile}.ps 
+
+#if [ "$stname" == "" ] ; then
+    cat $plotdir/sta.lst | pstext -JX -R -O -K -N >> ${outfile}.ps 
+#fi
 if [ "$phase" != "" ] ; then
     n=`echo $phase | awk '{n=split($1,a,"-");print n}'`
     for (( j=1; j <= n; j++ ))
@@ -184,7 +216,7 @@ if [ "$phase" != "" ] ; then
         ph=`echo $phase | cut -d"-" -f $j` 
         cat $plotdir/taup.txt | grep $ph | psxy -JX -R -M -W0.8p/${colors[$j]} \
         -K -O >> ${outfile}.ps
-        x=`cat plotdir/taup.txt | grep "^$ph" | awk 'BEGIN{max=0}{if($1>max)\
+        x=`cat $plotdir/taup.txt | grep "^$ph" | awk 'BEGIN{max=0}{if($1>max)\
            {max=$1}}END{print max}'`
         y=$(echo $maxy-50 | bc -q)
         echo "$x $y 20 0 0 LM $ph" | pstext -JX -R -G${colors[$j]} -K -O \
@@ -196,9 +228,12 @@ right=13
 psbasemap -JX4i/7i -R$minx/$maxx/$miny/$maxy -Ba500f100:"Time (s)"::."Tangential \
 component":/a500f100:"Distance (km)":nSwe -K -O -X$right \
 >> ${outfile}.ps 
-pssac2 -JX -R -Ekt-1 -M$scaling/0 plotdir/*.t -W0.5p/blue -K -O \
+pssac2 -JX -R -Ekt-1 -M$scaling/0 $plotdir/*.t -W0.5p/blue -K -O \
 >> ${outfile}.ps
-cat $plotdir/sta.lst | pstext -JX -R -O -K -N >> ${outfile}.ps 
+#if [ "$stname" == "" ] ; then
+    #echo "coming here"
+    cat $plotdir/sta.lst | pstext -JX -R -O -K -N >> ${outfile}.ps 
+#fi
 if [ "$phase" != "" ] ; then
     n=`echo $phase | awk '{n=split($1,a,"-");print n}'`
     for (( j=1; j <= n; j++ ))
@@ -206,7 +241,7 @@ if [ "$phase" != "" ] ; then
         ph=`echo $phase | cut -d"-" -f $j` 
         cat $plotdir/taup.txt | grep $ph | psxy -JX -R -M -W0.8p/${colors[$j]} \
         -K -O >> ${outfile}.ps
-        x=`cat plotdir/taup.txt | grep "^$ph" | awk 'BEGIN{max=0}{if($1>max)\
+        x=`cat $plotdir/taup.txt | grep "^$ph" | awk 'BEGIN{max=0}{if($1>max)\
            {max=$1}}END{print max}'`
         y=$(echo $maxy-50 | bc -q)
         echo "$x $y 20 0 0 LM $ph" | pstext -JX -R -G${colors[$j]} -K -O \
@@ -215,7 +250,7 @@ if [ "$phase" != "" ] ; then
 fi
 
 #rm $plotdir/sta.lst
-rm $plotdir/taup.txt 
+#rm $plotdir/taup.txt 
 popd > /dev/null
 
 echo ""

@@ -44,6 +44,8 @@ alias may="vi ~/Documents/EOS/dropbox/docs/sagar/expenses/may15.txt"
 alias mechanics="ssh -Y mechanics@komodo.spms.ntu.edu.sg"
 alias qm="qstat -f "
 alias lat="vi ~/src/mybashrc/readmedir/latex.txt"
+alias todo="vi ~/Documents/EOS/dropbox/geophysics/preparation/list.txt"
+alias wpap="vi ~/src/paper/wharton12/masuti+16.tex"
 
 function pral() {
 echo "as -> aliaser show"
@@ -94,4 +96,6 @@ echo "may -> vi ~/Documents/EOS/dropbox/docs/sagar/expenses/may15.txt"
 echo "mechanics -> ssh -Y mechanics@komodo.spms.ntu.edu.sg"
 echo "qm -> qstat -f "
 echo "lat -> vi ~/src/mybashrc/readmedir/latex.txt"
+echo "todo -> vi ~/Documents/EOS/dropbox/geophysics/preparation/list.txt"
+echo "wpap -> vi ~/src/paper/wharton12/masuti+16.tex"
 }

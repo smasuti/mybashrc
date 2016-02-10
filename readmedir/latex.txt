@@ -1,3 +1,12 @@
-#1) For plus or minus sign
+1) For plus or minus sign
     \newcommand{\rpm}{\sbox0{$1$}\sbox2{$\scriptstyle\pm$}
   \raise\dimexpr(\ht0-\ht2)/2\relax\box2 }
+
+2) For approximate symbol(~) in text mode 
+    \usepackage{textcomp}
+    \texttildelow
+
+3) Multiple equations with each labled
+    \usepackage{amsmath,amsfonts}
+
+4) 

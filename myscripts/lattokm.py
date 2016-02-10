@@ -19,10 +19,10 @@ def main():
     lat = arguments['--lat']
     lon = arguments['--lon']
     comString = "echo " + lon + " " + lat + "| proj +proj=utm +zone=47"
-    print (comString)  
+    print (comString)
     f = os.popen(comString)
     east,north = f.read().split("\t")
-    ceast=float(east) 
+    ceast=float(east)
     cnorth=float(north)
     print (ceast, cnorth)
     ceast=(ceast+56748.29)/1000
