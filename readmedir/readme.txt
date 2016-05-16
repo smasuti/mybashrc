@@ -148,6 +148,8 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
 
 46) compiling the relax for miracle on komodo. 
     CFLAGS=-fPIC FCFLAGS=-fPIC ./waf configure --gmt-dir=/usr/local/GMT4.5.8/gnu --use-fftw --fftw-dir=/usr/local/fftw-3.3.2/gnu
+    LDFLAGS=-L/usr/local/netcdf-3.6.3/gnu/lib CPPFLAGS=-L/usr/local/netcdf-3.6.3/gnu/include CFLAGS=-fPIC FCFLAGS=-fPIC ./waf configure --gmt-dir=/usr/local/GMT4.5.8/gnu --use-fftw --fftw-dir=/usr/local/fftw-3.3.2/gnu
+
     CFLAGS=-fPIC FCFLAGS=-fPIC ./waf lite
     compiling the relax on komodo. 
     ./waf configure --gmt-dir=/usr/local/GMT4.5.8/gnu --use-fftw --fftw-dir=/usr/local/fftw-3.3.2/gnu
@@ -226,3 +228,15 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
 68) Checking for number of files in a directory.
     find .//. ! -name . -print | grep -c //
 
+69) Display 2 files side by side 
+    pr -m -t temp1 temp2
+
+70) Dike input processing 
+    cat kc1dz8_drhoNegCG_0086002.dat | awk -v offset=28.2707 '{$1=-$1-offset;print $1,$2}' > input_depth_opening.dat
+
+71) Converting from subflt to flt format of relax.
+    grep -v "#" slipmodel.m8.2 | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9}' | proj +proj=utm +zone=47 | awk 'BEGIN{print "# nb  slip      x1      x2      x3   length  width strike dip  rake"}{print NR,$3/100,($1+56748.29)/1e3, ($2-221910.44)/1e3,$3,23,5,$7,$8,$6}' > swei+13_aftershock.flt
+
+72) Getting the names from the kml file 
+    cat doc.kml | grep name | cut -d'[' -f 3 | cut -d']' -f 1 > names.xy
+    

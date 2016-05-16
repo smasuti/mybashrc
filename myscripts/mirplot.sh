@@ -9,8 +9,8 @@ OUT_DIR="$1/plots"
 mkdir -p $OUT_DIR
 gsed -i "23i DATA_DIR_PATH=\"${DATA_PATH}\"" ${PLOT_SCRIPT_PATH} 
 i=${CUR_PATH}/relax_0001
-#for i in ${CUR_PATH}/relax_*;
-#do 
+for i in ${CUR_PATH}/relax_*;
+do 
 	if [ -e $i/ABGS.ned ]; then
 		echo "Processing $i"
 		gsed -i "24i model=\"$i/\"" ${PLOT_SCRIPT_PATH} 
@@ -25,5 +25,5 @@ i=${CUR_PATH}/relax_0001
 		rm fit.eps
 		gsed -i 24d ${PLOT_SCRIPT_PATH} 
 	fi
-#done
+done
 gsed -i 23d ${PLOT_SCRIPT_PATH} 

@@ -9,5 +9,5 @@ mv stdout $1.dat
 # if 3 model parameter add $6 to the below awk.
 expnum=`echo $1 | cut -d"_" -f 3`
 size=`echo $1 | cut -d"_" -f 2`
-cat $1.dat | grep "in.param" | awk '{print NR,$2,$4,$5}' > wharton_${size}_${expnum}.dat
+cat $1.dat | grep "in.param" | awk 'BEGIN{print "\%n    misfit    m1(coh)    m2(V_0)"}{print NR,$2,$4,$5}' > wharton_${size}_${expnum}.dat
 echo "created wharton_${size}_${expnum}.dat file"

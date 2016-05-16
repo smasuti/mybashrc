@@ -9,4 +9,7 @@
 3) Multiple equations with each labled
     \usepackage{amsmath,amsfonts}
 
-4) 
+4) ie and eg
+    \newcommand{\eg}{\hbox{e.g., }}
+    \newcommand{\ie}{\hbox{i.e., }}
+ 
