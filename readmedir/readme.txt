@@ -240,3 +240,28 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
 72) Getting the names from the kml file 
     cat doc.kml | grep name | cut -d'[' -f 3 | cut -d']' -f 1 > names.xy
     
+73) Compiling relax on NSCC
+    #Configuring with cuda
+    ./waf configure --use-fftw  --proj-dir=/home/ntu/sagarshr/src/proj/
+    --gmt-dir=/home/ntu/sagarshr/src/gmt/ --use-cuda --cuda-dir=/app/cuda/6.5/
+    #Normal configuration
+    ./waf configure --use-fftw  --proj-dir=/home/ntu/sagarshr/src/proj/
+    --gmt-dir=/home/ntu/sagarshr/src/gmt/
+    #compiling the library
+    CFLAGS=-fPIC FCFLAGS=-fPIC ./waf configure --use-fftw
+    --proj-dir=/home/ntu/sagarshr/src/proj/ --gmt-dir=/home/ntu/sagarshr/src/gmt/
+    CFLAGS=-fPIC FCFLAGS=-fPIC ./waf lite
+
+######     After the alpha test finished    ################# 
+    module load cuda/7.0
+    module load fftw/3.3.4/xe_2016/parallel
+    CFLAGS=-fPIC FCFLAGS=-fPIC ./waf configure --use-fftw --use-cuda --proj-dir=/home/users/ntu/sagarshr/mysoft/
+    CFLAGS=-fPIC FCFLAGS=-fPIC ./waf lite
+# compiling relax-miracle
+    module load intelmpi
+    make
+# interactive job
+    qsub -I -q gpu  -l select=1:ncpus=1:ngpus=1
+
+74) For ps_font problem on komodo, do the following:
+    export GMT_SHAREDIR=/usr/local/software/GMT4.5.8/share/
