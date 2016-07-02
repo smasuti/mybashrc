@@ -40,6 +40,8 @@ echo "removing SearchComplete ..."
 rm ~/.vim/plugin/SearchComplete.vim
 echo "removing mru ..."
 rm ~/.vim/plugin/mru.vim
+echo "removing doxygen..."
+rm ~/.vim/plugin/DoxygenToolkit.vim
 echo "removing the dirdiff ..."
 rm -rf ~/.vim/bundle/vim-dirdiff
 echo "removing the ctrlp..."

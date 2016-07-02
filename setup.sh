@@ -245,3 +245,14 @@ if [ ! -d ~/.vim/bundle/Trinity ]; then
 else
     echo "Trinity found: yes"
 fi
+
+if [ ! -d ~/.vim/plugin/DoxygenToolkit.vim ]; then 
+	echo "Doxygen found: no"
+	echo "installing Doxygen..."
+    git clone https://github.com/mrtazz/DoxygenToolkit.vim.git 
+    cp DoxygenToolkit.vim/plugin/DoxygenToolkit.vim ~/.vim/plugin/ 
+    rm -rf DoxygenToolkit.vim
+    echo "Doxygen installed"
+else
+    echo "Doxygen found: yes"
+fi

@@ -8,8 +8,8 @@ set terminal postscript eps enhanced color
 outputname="fit.eps"
 set output outputname
 
-#station="ABGS BITI BTET HNKO LHW2 PBKR PBLI PSMK PTLO RNDG SDKL BTHL BNON BSIM LEWK UMLH"
-station="RNDG SDKL BTHL BNON BSIM LEWK UMLH"
+station="ABGS BITI BTET HNKO LHW2 PBKR PBLI PSMK PTLO RNDG SDKL BTHL BNON BSIM LEWK UMLH"
+#station="RNDG SDKL BTHL BNON BSIM LEWK UMLH"
 set multiplot
 set size 0.40,0.9
 set xrange [0:1]

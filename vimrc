@@ -122,6 +122,10 @@ let g:SrcExpl_searchLocalDef = 1
 " Launching trinity
 map <Leader>ww :TrinityToggleAll<CR>
 
+let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------" 
+let g:DoxygenToolkit_blockFooter="--------------------------------------------------------------------------" 
+let g:DoxygenToolkit_authorName="Sagar Masuti" 
+
 "let g:solarized_termtrans=1
 "let g:solarized_termcolors=256
 "let g:solarized_contrast="high"
