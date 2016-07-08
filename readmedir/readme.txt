@@ -265,3 +265,10 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
 
 74) For ps_font problem on komodo, do the following:
     export GMT_SHAREDIR=/usr/local/software/GMT4.5.8/share/
+
+75) Converting from pdf to tiff
+    gs -o s5_gs.tiff -sDEVICE=tiff24nc -r600x600 -sPAPERSIZE=a4 Figure-S5.pdf
+    convert  -density 300x300 Figure-S5.pdf s5.tiff 
+    
+    reduce the size:
+    tiffutil -lzw s5_gs.tiff -out s5_reduced.tiff
