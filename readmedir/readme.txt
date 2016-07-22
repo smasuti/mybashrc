@@ -255,7 +255,7 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
 ######     After the alpha test finished    ################# 
     module load cuda/7.0
     module load fftw/3.3.4/xe_2016/parallel
-    CFLAGS=-fPIC FCFLAGS=-fPIC ./waf configure --use-fftw --use-cuda --proj-dir=/home/users/ntu/sagarshr/mysoft/
+    CFLAGS=-fPIC FCFLAGS=-fPIC ./waf configure --use-fftw --use-cuda --proj-dir=/home/users/ntu/sagarshr/mysoft/ --relax-lite
     CFLAGS=-fPIC FCFLAGS=-fPIC ./waf lite
 # compiling relax-miracle
     module load intelmpi
