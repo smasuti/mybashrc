@@ -29,5 +29,3 @@ Doxygen   (Doxygen commands)
 
 If you are not happy with the look and feel. You can revert to your original by 
 using revert.sh
-
-Sagar.
