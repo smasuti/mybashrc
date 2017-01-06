@@ -46,7 +46,8 @@ echo "removing the dirdiff ..."
 rm -rf ~/.vim/bundle/vim-dirdiff
 echo "removing the ctrlp..."
 rm -rf ~/.vim/bundle/ctrlp.vim
-echo "removing the python-syntax..."
+echo "removing the supertab ..."
+rm -rf ~/.vim/bundle/supertab
 
 source ~/.bash_profile
 

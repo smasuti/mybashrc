@@ -14,6 +14,7 @@ Usage: seismicity [options]
       -i, --mms=<min/max/step>    Uses the min/max/step to generate the cpt.
       -o, --output=<outfile>      Uses the outfile to output [default: seismicity.ps]
       -t, --type=<database>       Option of choosing the USGS/CMT. [default: USGS]		
+      -a, --add=<script>          Option of overlaying other scripts. 
       -l,                         Adds the magnitude and date to the earthquake.
       -n, --nodisplay             If specified dont display only download and plot. [default: false]
       --help                      Show help options.
@@ -30,7 +31,7 @@ Examples:
      seismicity.sh -r 119/123/21/26 -s 1960-01-01 -e 2016-02-06
 ----
 seismicity 1.0
-Copyright (C) 2015 Sagar Masuti
+opyright (C) 2015 Sagar Masuti
 Author: Sagar Masuti & Shweta Kalghatgi
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
@@ -62,11 +63,12 @@ checkDownload ()
 # --------------------------------------------------------------------------------------------------
 # Variables.
 t=2
-res=i
+res=f
 amp="&"
 download="true"
 psFile="$output"
 pdfFile="seismicity.pdf"
+selfdir=$PWD
 # --------------------------------------------------------------------------------------------------
 
 # ------------- defaults ----------------
@@ -219,7 +221,13 @@ fi
 
 echo "plotting the boundary/coast ..."
 title="Seismicity (From $start to $end)"
-pscoast -R$region -Bf${t}a${t}:"":/f${t}a${t}:""::."$title":WSne -W1 -JM7i -P -K -D$res -N1 > $psFile
+pscoast -R$region -Bf${t}a${t}:"":/f${t}a${t}:""::."$title":WSne -Glightgreen -Slightblue -W1 -JM7i -P -K -D$res -Na > $psFile
+
+for prog in $add; do 
+    echo "Evaluating $prog ... "
+    echo "$selfdir"
+    eval "$selfdir/$prog -r $region -o $psFile"
+done 
 
 if [ "$mms" == "" ]; then
 

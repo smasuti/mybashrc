@@ -160,6 +160,9 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
     # here we replace any 0-0 with 0 -0 also notice that \([0-9]\) is held in 1
     The same can be done to all the files using the below command
     sed -i 's/\([0-9]\)-/\1 -/g' *.ned
+    sed -i 's/\([0-9]\)-/\1 -/g' in.param.000?
+    # replacing the . with relax_000? in input file
+    for i in in.param.000?; do t=relax_`echo $i | cut -d"." -f 3 `; sed -i "s/^\./$t/g" $i;done
 
 48) renaming the file from the relax.
     for i in *-relax.ned; do mv $(basename $i) $(basename $i .ned).dat; done
@@ -242,8 +245,9 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
     
 73) Compiling relax on NSCC
     #Configuring with cuda
-    ./waf configure --use-fftw  --proj-dir=/home/ntu/sagarshr/src/proj/
-    --gmt-dir=/home/ntu/sagarshr/src/gmt/ --use-cuda --cuda-dir=/app/cuda/6.5/
+    ./waf configure --use-fftw  --proj-dir=/home/users/ntu/sagarshr/mysoft/newhome/sagarshr/src/proj/ 
+    --gmt-dir=/home/users/ntu/sagarshr/mysoft/newhome/sagarshr/src/gmt/ --use-cuda --cuda-dir=/app/cuda/6.5
+
     #Normal configuration
     ./waf configure --use-fftw  --proj-dir=/home/ntu/sagarshr/src/proj/
     --gmt-dir=/home/ntu/sagarshr/src/gmt/
@@ -272,3 +276,22 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
     
     reduce the size:
     tiffutil -lzw s5_gs.tiff -out s5_reduced.tiff
+
+76) rename all the files from miracle. ????-relax.ned to ????.ned 
+    for i in relax_*; do for j in $i/*.ned; do a=`echo $j | cut -d"-" -f 1`;ext=`echo .ned`; mv $j $a$ext; done;done
+    for i in ????-relax.dat; do a=`echo $i | cut -d"-" -f 1`; b=`echo ".dat"`; mv $i $a$b; done
+
+77) Processing the models for copula.
+    # copy the model and its output.
+    scp -r sagarshr001@komodo.ase.ntu.edu.sg:~/workspace/wharton12/miracle/miracle_16_61 .    
+    # remove the coseismic offset
+    for i in relax_*; do pushd $i; obsrelax.sh ????.ned; popd; done
+    # delete the old files
+    for i in relax_*; do pushd $i; rm ????.ned; popd; done 
+    # rename ????-relax.ned to ????.ned 
+    for i in relax_*; do for j in $i/*.ned; do a=`echo $j | cut -d"-" -f 1`;ext=`echo .ned`; mv $j $a$ext; done;done
+    # process the stdout to output the models.
+    cat stdout | grep in.param | awk '{print $4,$5,$2}' > models.dat
+    
+78) Check weather.
+    curl http://wttr.in/singapore

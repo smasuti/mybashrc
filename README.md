@@ -7,7 +7,7 @@ or
 You can open files selectively and take what is only necessary. 
 ### Packages included here are: 
 
-## Package   Details - shortcut
+ Package   Details - shortcut
 
  - Pathogen  (Package Manager)
  - Gruvbox   (Color Scheme)

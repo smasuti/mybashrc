@@ -256,3 +256,14 @@ if [ ! -d ~/.vim/plugin/DoxygenToolkit.vim ]; then
 else
     echo "Doxygen found: yes"
 fi
+
+if [ ! -d ~/.vim/bundle/supertab ]; then 
+	echo "supertab found: no"
+	echo "installing supertab..."
+    pushd ~/.vim/bundle > /dev/null
+    git clone https://github.com/ervandew/supertab.git 
+    popd > /dev/null
+    echo "supertab installed"
+else
+    echo "supertab found: yes"
+fi
