@@ -14,8 +14,11 @@ set noerrorbells
 set novisualbell
 set expandtab
 set incsearch
-set textwidth=80
+"set textwidth=80
 set formatoptions=cq
+" display incomplete commands
+set showcmd 
+
 
 autocmd FileType make setlocal noexpandtab
 autocmd FileType python set tabstop=4|set shiftwidth=4|set expandtab
@@ -96,7 +99,7 @@ set wildignore=*.pyc
 " MRU shortcut 
 map <Leader>rr :MRU<CR>
 
-" To draw line at column 80 
+ "To draw line at column 80 
 let &colorcolumn=join(range(81,999),",")
 let &colorcolumn="80,".join(range(400,999),",")
 
@@ -104,20 +107,20 @@ let &colorcolumn="80,".join(range(400,999),",")
 let g:ctrlp_match_window='bottom,order:ttb'
 let g:ctrlp_switch_buffer=0
 let g:ctrlp_working_path_mode=0
-let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
+let g:ctrlp_custom_ignore='\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
 
 " Python syntax highlighting
-let python_highlight_all = 1
+let python_highlight_all=1
 
 " Disable atp
 let g:no_atp=1
 
 " Source Explorer
 " // Set the height of Source Explorer window 
-let g:SrcExpl_winHeight = 20 
+let g:SrcExpl_winHeight=20 
 map <Leader>ss :SrcExpl<CR>
 map <Leader>sc :SrcExplClose<CR>
-let g:SrcExpl_searchLocalDef = 1
+let g:SrcExpl_searchLocalDef=1
 
 " Launching trinity
 map <Leader>ww :TrinityToggleAll<CR>
@@ -126,8 +129,12 @@ let g:DoxygenToolkit_blockHeader="----------------------------------------------
 let g:DoxygenToolkit_blockFooter="--------------------------------------------------------------------------" 
 let g:DoxygenToolkit_authorName="Sagar Masuti" 
 
+" For airline
+set laststatus=2
+
 "let g:solarized_termtrans=1
 "let g:solarized_termcolors=256
 "let g:solarized_contrast="high"
 "let g:solarized_visibility="high"
 "colorscheme solarized
+

@@ -69,6 +69,7 @@ download="true"
 psFile="$output"
 pdfFile="seismicity.pdf"
 selfdir=$PWD
+projection=M4i
 # --------------------------------------------------------------------------------------------------
 
 # ------------- defaults ----------------
@@ -221,7 +222,7 @@ fi
 
 echo "plotting the boundary/coast ..."
 title="Seismicity (From $start to $end)"
-pscoast -R$region -Bf${t}a${t}:"":/f${t}a${t}:""::."$title":WSne -Glightgreen -Slightblue -W1 -JM7i -P -K -D$res -Na > $psFile
+pscoast -R$region -Bf${t}a${t}:"":/f${t}a${t}:""::."$title":WSne -Glightgreen -Slightblue -W1 -J$projection -P -K -D$res -Na > $psFile
 
 for prog in $add; do 
     echo "Evaluating $prog ... "
@@ -294,13 +295,13 @@ count=`grep -v "#" $file | wc -l`
 echo "Number of earthquakes : $count"
 echo "plotting the seismicity ..."
 if [ $type == "USGS" ]; then
-	grep -v "#" $file | awk '{print $1,$2,$3,$4*$4/100}' | psxy -O -K -JM7i -R$region -P -M -Cdepth.cpt -Sc -W0.22p/0/0/0 >> $psFile
+	grep -v "#" $file | awk '{print $1,$2,$3,$4*$4/100}' | psxy -O -K -J$projection -R$region -P -M -Cdepth.cpt -Sc -W0.22p/0/0/0 >> $psFile
     if [ $l == "true" ]; then 
         grep -v "#" $file | awk '{printf("%.3f %.3f 08 0 29 LM Mw%.1f %d/%d/%d\n",$1,$2,$4,$5,$6,$7);}' | \
-        pstext -O -K  -R$region -JM7i -P -G50/50/225 -D0.2c/0 >> $psFile 
+        pstext -O -K  -R$region -J$projection -P -G50/50/225 -D0.2c/0 >> $psFile 
     fi
 else
-	grep -v "#" $file | psmeca -V -O -K -JM7i -R$region -Zdepth.cpt -P -M -D0/110 -G0/204/0 \
+	grep -v "#" $file | psmeca -V -O -K -J$projection -R$region -Zdepth.cpt -P -M -D0/110 -G0/204/0 \
 		   -W1p/0/0/0 -Sd0.5/-1/0 >> $psFile
 	#grep -v "#" $file |	\
 	#awk 'function log10(x){return log(x)/log(10)}; \
