@@ -295,3 +295,8 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
     
 78) Check weather.
     curl http://wttr.in/singapore
+
+79) Mercurial reverting (equivalent to checkout of git) is 
+    hg revert filename
+
+80)

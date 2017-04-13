@@ -44,6 +44,7 @@ mkdir -p ~/.modules
 cp -r modules/* ~/.modules/
 
 mkdir -p ~/.vim/undodir
+mkdir -p ~/.vim/plugin
 
 ##installing docopts
 #which docopts > /dev/null
