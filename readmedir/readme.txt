@@ -299,4 +299,5 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
 79) Mercurial reverting (equivalent to checkout of git) is 
     hg revert filename
 
-80)
+80) Converting video to image (tif format)
+    ffmpeg -i DSCN8992.MOV -pix_fmt rgb24 out%05d.tif
