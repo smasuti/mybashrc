@@ -300,4 +300,7 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
     hg revert filename
 
 80) Converting video to image (tif format)
-    ffmpeg -i DSCN8992.MOV -pix_fmt rgb24 out%05d.tif
+    ffmpeg -i DSCN8992.MOV -pix_fmt rgb24 -r 1 out%05d.tif
+
+81) Plotting mapview of relax best fit model
+    grdmap.sh -g -p -0.03/0.03/0.001 -b 88.2/101/-2/7 -s 1 -v 0.05 -t 5 -c anatolia.cpt -e ./gmt/eslab.sh -e ./gmt/ecoasts.sh -e ./gmt/ewharton.sh -e ./gmt/efaults.sh -e ./gmt/emoment.sh -e ./gmt/egpsdata.sh -i ./gmt/etopo2_ll_3_hs.grd best_2240_4260_miracle_52_122/392-relax_ll-up.grd
