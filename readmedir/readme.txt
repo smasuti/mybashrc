@@ -266,6 +266,23 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
     make
 # interactive job
     qsub -I -q gpu  -l select=1:ncpus=1:ngpus=1
+*********** Update on 21-07-2017 *********************
+    module load cuda80/toolkit/8.0.44 
+    mol openmpi/gcc493/1.10.2
+    CFLAGS=-fPIC FCFLAGS=-fPIC ./waf configure --use-fftw --use-cuda --proj-dir=/home/users/ntu/sagarshr/mysoft/ --relax-lite
+    CFLAGS=-fPIC FCFLAGS=-fPIC ./waf lite
+
+    # for miracle
+    make
+
+    # compiling normal relax without cuda
+    mol fftw/3.3.4/xe_2017/parallel
+    ./waf configure --use-fftw --proj-dir=/home/users/ntu/sagarshr/mysoft/ --gmt-incdir=/home/users/ntu/sagarshr/mysoft/newhome/sagarshr/software/gmt/src/ --gmt-libdir=/home/users/ntu/sagarshr/mysoft/newhome/sagarshr/software/gmt/src/
+
+    # comiling miracle without GPU
+    mol mpiP/3.4.1/gcc493
+    CFLAGS=-fPIC FCFLAGS=-fPIC ./waf configure --use-fftw --proj-dir=/home/users/ntu/sagarshr/mysoft/ --gmt-incdir=/home/users/ntu/sagarshr/mysoft/newhome/sagarshr/software/gmt/src/ --gmt-libdir=/home/users/ntu/sagarshr/mysoft/newhome/sagarshr/software/gmt/src/ --relax-lite
+    CFLAGS=-fPIC FCFLAGS=-fPIC ./waf lite
 
 74) For ps_font problem on komodo, do the following:
     export GMT_SHAREDIR=/usr/local/software/GMT4.5.8/share/
@@ -304,3 +321,10 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
 
 81) Plotting mapview of relax best fit model
     grdmap.sh -g -p -0.03/0.03/0.001 -b 88.2/101/-2/7 -s 1 -v 0.05 -t 5 -c anatolia.cpt -e ./gmt/eslab.sh -e ./gmt/ecoasts.sh -e ./gmt/ewharton.sh -e ./gmt/efaults.sh -e ./gmt/emoment.sh -e ./gmt/egpsdata.sh -i ./gmt/etopo2_ll_3_hs.grd best_2240_4260_miracle_52_122/392-relax_ll-up.grd
+
+82) Total number of nodes getting used
+    gstat | grep medium | awk 'BEGIN{sum=0}{if($8=="R"){sum+=$4}}END{print sum}'
+    # checking how many nodes are free
+    pbsnodes -a | grep "state = free" | wc
+    # checking how many nodes are busy
+    pbsnodes -a | grep "state = job-busy" | wc
