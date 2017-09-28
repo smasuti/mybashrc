@@ -268,3 +268,5 @@ if [ ! -d ~/.vim/bundle/supertab ]; then
 else
     echo "supertab found: yes"
 fi
+
+

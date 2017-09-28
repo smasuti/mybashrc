@@ -6,6 +6,10 @@
     \usepackage{textcomp}
     \texttildelow
 
+or 
+    \usepackage{textcomp}
+    \newcommand{\textapprox}{\raisebox{0.5ex}{\texttildelow}}
+
 3) Multiple equations with each labled
     \usepackage{amsmath,amsfonts}
 
@@ -30,3 +34,7 @@
 
 6) To write french names 
     Lam\'e
+
+7) To draw a line over the text (Kaikōura)
+    \newcommand{\textbar}[1]{$\bar{\mbox{#1}}$}
+

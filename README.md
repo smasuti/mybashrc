@@ -25,6 +25,8 @@ You can open files selectively and take what is only necessary.
  - Trinity   (Combines src expl, ctags, nerdtree)
  - Doxygen   (Doxygen commands)
 
+## Note: default ctags on MAC does not work so here I have install_ctags.sh which will download the exuberant-ctags version 5.8. If this installation didnt work then it probably means the weblink in the install_ctags.sh is no longer valid (consider editing it).
+
 ### Revert back:
 
 If you are not happy with the look and feel. You can revert to your original by 

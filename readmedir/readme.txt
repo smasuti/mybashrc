@@ -328,3 +328,4 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
     pbsnodes -a | grep "state = free" | wc
     # checking how many nodes are busy
     pbsnodes -a | grep "state = job-busy" | wc
+

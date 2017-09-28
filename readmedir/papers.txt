@@ -2,3 +2,16 @@ List of papers to read on viscoelastic relaxation:
 1) Reid,1910 -> Birth of geodesy.
 2) Thatcher, 1983 -> Probably first paper using viscoelastic relaxation.
 
+
+
+List of papers to read on Afterslip:
+1) Hearn et al, 2002
+2) Burgmann et al, 2002
+3) 
+
+P
+Sato 1971
+Sato and matsura 1973
+Ben Gillon 1970
+Jovanovich 1974
+Roth 1983
