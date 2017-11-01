@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-scp sagarshr001@komodo.ase.ntu.edu.sg:/mnt/isilon/userdata/home/sagarshr001/workspace/wharton12/miracle/$1/stdout .
-#scp sagarshr@ntu.nscc.sg:/home/users/ntu/sagarshr/workspace/wharton12/miracle/$1/stdout .
+#scp sagarshr001@komodo.ase.ntu.edu.sg:/mnt/isilon/userdata/home/sagarshr001/workspace/wharton12/miracle/$1/stdout .
+scp sagarshr@ntu.nscc.sg:/home/users/ntu/sagarshr/workspace/wharton12/miracle/$1/stdout .
 #relax="relax_"`echo $2 | awk '{printf "%04.4d",$1}'`
 #echo $relax
 #scp mechanics@komodo.ase.ntu.edu.sg:~//wharton12/$1/stdout .
