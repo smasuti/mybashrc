@@ -182,6 +182,7 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
 
 54) Printing the last line of relax output or status of miracle.
     for i in relax_*; do printf $i; tail $i/ABGS.ned | sed -n 10p; done
+    for i in relax_*; do printf $i; tail $i/ABGS.ned | sed '$!d'; done
     for i in relax_*; do tail $i/ABGS.ned | sed -n 10p| awk -v n=$i '{if(1.0>$1){print n, $1}}'; done
 
 55) Counting number characters in latex document.
@@ -328,4 +329,24 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
     pbsnodes -a | grep "state = free" | wc
     # checking how many nodes are busy
     pbsnodes -a | grep "state = job-busy" | wc
+
+83) Compiling on relax HPCC/NYA2
+    ./waf configure --check-c-compiler=icc --check-cxx-compiler=icpc --check-fortran-compiler=ifort --gmt-dir=/usr/local/RH6_apps/GMT4.5.8/intel --mkl-dir=/usr/local/intel/composerxe/mkl --proj-dir=/usr/local/RH6_apps/proj-4.8.0-intel --mkl-libdir=/usr/local/intel/composer_xe_2013.1.117/mkl/lib/intel64
+    
+    # With my own proj
+    CFLAGS=-fPIC FCFLAGS=-fPIC ./waf configure --check-c-compiler=icc --check-cxx-compiler=icpc --check-fortran-compiler=ifort --gmt-dir=/usr/local/RH6_apps/GMT4.5.8/intel --mkl-dir=/usr/local/intel/composerxe/mkl --proj-dir=/home/sagarshr001/mysoft/proj/ --mkl-libdir=/usr/local/intel/composer_xe_2013.1.117/mkl/lib/intel64 --relax-lite 
+
+    #compiling miracle on NYA2
+    mol openmpi-1.6.4-intel
+    mol relax
+
+# Update on 10th Nov 2017
+    module load gnu-4.8.4
+    module load netcdf-4.1.3-gnu
+    CFLAGS=-fPIC FCFLAGS=-fPIC ./waf configure --use-fftw --proj-dir=/home/sagarshr001/mysoft/proj/ --fftw-dir=/home/sagarshr001/mysoft/fftw/ --relax-lite
+    CFLAGS=-fPIC FCFLAGS=-fPIC ./waf lite
+
+    
+
+
 
