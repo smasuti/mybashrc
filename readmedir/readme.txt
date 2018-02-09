@@ -184,6 +184,7 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
     for i in relax_*; do printf $i; tail $i/ABGS.ned | sed -n 10p; done
     for i in relax_*; do printf $i; tail $i/ABGS.ned | sed '$!d'; done
     for i in relax_*; do tail $i/ABGS.ned | sed -n 10p| awk -v n=$i '{if(1.0>$1){print n, $1}}'; done
+    for i in relax_*; do if [ -e $i/ABGS.ned ]; then printf $i; tail $i/ABGS.ned | sed '$!d'; fi ; done
 
 55) Counting number characters in latex document.
     texcount -char abstract.tex

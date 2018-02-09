@@ -38,3 +38,9 @@ or
 7) To draw a line over the text (Kaikōura)
     \newcommand{\textbar}[1]{$\bar{\mbox{#1}}$}
 
+8) Degree symbol
+    \usepackage{gensymb}
+    \degree
+
+9) Double quotes
+   \newcommand{\quotes}[1]{``#1''}

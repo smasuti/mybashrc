@@ -15,3 +15,8 @@ Sato and matsura 1973
 Ben Gillon 1970
 Jovanovich 1974
 Roth 1983
+
+List of papers related to numerical methods
+1) Comparison between LSE (least square estimation) and MLE (Maximum liklihood estimation)
+   On the fitting of parallel isochrons and the method of maximum liklihood, Titterington and Halliday
+2) 
