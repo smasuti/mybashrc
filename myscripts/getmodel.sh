@@ -25,7 +25,7 @@ EOF
 
 case $source in 
 [1])
-scp sagarshr001@komodo.ase.ntu.edu.sg:/mnt/isilon/userdata/home/sagarshr001/workspace/wharton12/miracle/$model/stdout .
+scp sagarshr001@komodo.ase.ntu.edu.sg:/mnt/isilon/userdata/home/sagarshr001/workspace/wharton12/slip_system_dependent_rheology/$model/stdout .
 ;;
 [2])
 #scp sagarshr@ntu.nscc.sg:/home/users/ntu/sagarshr/workspace/wharton12/miracle/benchmark_3_param/$model/stdout .

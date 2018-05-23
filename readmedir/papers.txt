@@ -7,16 +7,48 @@ List of papers to read on viscoelastic relaxation:
 List of papers to read on Afterslip:
 1) Hearn et al, 2002
 2) Burgmann et al, 2002
-3) 
+3) Perfettini and Avouac, 2004 
+4) 
 
-P
 Sato 1971
 Sato and matsura 1973
 Ben Gillon 1970
 Jovanovich 1974
 Roth 1983
 
-List of papers related to numerical methods
-1) Comparison between LSE (least square estimation) and MLE (Maximum liklihood estimation)
-   On the fitting of parallel isochrons and the method of maximum liklihood, Titterington and Halliday
-2) 
+
+List of papers to be read related to mineral physics:
+1) Bai et al, 1991 (again)
+2) Kohlstedt and Bai, 1992
+3) Post, 1977, High-temperature creep of Mt. Burnet dunite
+4) Kirby, 1978, Rheology of olivine: a critical review
+5) Hobbs, 1972, Recrystallization of single crystals of quartz.
+6) Goetze & Kohlstedt, 1973, Laboratory study of dislocation climb and diffusion in olivine  
+7) Kirby & Raleigh, 1973, Mechanism of high temperature, solid state flow in minerals and ceramics and their bearing on creep behaviour of the mantle.
+8) Wang et al, 2003, The deformation-DIA: A new apparatus for high temperature triaxial deformation to pressures up to 15 GPa.
+9) Yamazaki & Karato, 2001, High pressure rotational deformation apparatus to 15 GPa 
+10) li et al, 2004, Stress measurements of deforming olivine at high pressure.
+11) Poirier et al, 1984, On the activation volume for creep and its variation with depth in the Earth's lower mantle.
+12) Weertman 1970, The creep strength of the Earth's mantle. 
+13) Demouchy, 2012, Deformation of olivine in torsion under hydrous conditions   
+14) Weertman, 1999, Microstructural mechanisms of creep
+15) Dohmen et al., 2002, The effect of water on Si and O diffusion rates in olivine and implications for transport properties and
+processes in the upper mantle
+16) Costa & Chakraborthy, 2008, Si and O diffusion in olivine and implications for characterizing plastic flow in the mantle
+17) Katayama & Karato, 2008,  Low-temperature, high-stress deformation of olivine under water-saturated conditions
+18) Hirth & Kohlstedt, 2015, The stress dependence of olivine creep rate: Implications for extrapolation of lab data and interpretation
+of recrystallized grain size
+19) Paterson, 1969 
+20) U.Briegel and C.Goetze,Estimates of differential stress recorded in the dislocation structure of Lochseiten Limestone (Switzerland)
+21) Kirby, 1980, Tectonic stresses in the lithosphere: constraints provided by the experimental
+deformation of rocks.
+22) Evans and Kohlstedt, 1995, Rheology of rocks. In: Ahrens, T.J. (ed.), Rock Physics
+and Phase Relations: A Handbook of Physical Constants
+23) Demouchy, 2014, Viscoplasticity of
+polycrystalline olivine experimentally deformed at high pressure and 900°C
+24) Boioli, 2015, Modeling the creep
+properties of olivine by 2.5-dimensional dislocation dynamics simulations
+25) 
+
+Concepts to understand:
+-------------------------------------

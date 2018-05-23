@@ -153,7 +153,10 @@ grd2xyz ./coseismic/000-east.grd | awk '{printf "%f %f\n", $1*1e3-56748.29,$2*1e
     CFLAGS=-fPIC FCFLAGS=-fPIC ./waf lite
     compiling the relax on komodo. 
     ./waf configure --gmt-dir=/usr/local/GMT4.5.8/gnu --use-fftw --fftw-dir=/usr/local/fftw-3.3.2/gnu
-    if we dont use the fftw-dir bydefault its refering to some other and gives the memory allocation error.
+    #if we dont use the fftw-dir bydefault its refering to some other and gives the memory allocation error.
+
+    #if there is error for library libifport.so.5
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/intel/composer_xe_2011_sp1.7.256/lib/intel64/
 
 47) Pattern matching in the vi.
     %s/\([0-9]\)-/\1 -/gc

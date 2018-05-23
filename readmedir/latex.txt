@@ -44,3 +44,14 @@ or
 
 9) Double quotes
    \newcommand{\quotes}[1]{``#1''}
+
+10) ^ character 
+    \textasciicircum
+
+11) For making the text wrap in a table
+    \usepackage{array}
+    \newcolumntype{L}{>{\centering\arraybackslash}m{7cm}}
+
+    then in Table use L instead of c
+    \begin{tabular}{|c|c|L|c|} 
+
