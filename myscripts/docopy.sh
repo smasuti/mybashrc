@@ -16,3 +16,7 @@ cp $FROMDIR/ductile.dat $TODIR/
 cp $FROMDIR/prestress.dat $TODIR/
 cp $FROMDIR/readme.txt $TODIR/
 cp $FROMDIR/bench16.sh $TODIR/
+cp $FROMDIR/forward.sh $TODIR/
+cp $FROMDIR/genmodels_uniform.m $TODIR/
+cp $FROMDIR/run.sh $TODIR/
+cp $FROMDIR/relaxmiracle.sh $TODIR/

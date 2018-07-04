@@ -6,7 +6,7 @@ import sys
 def main():
     iIndex = 0
     for line in sys.stdin:
-        Coh,z,a,x1,x2,length,width,thick,strike,dip,zs= map(float, line.split())
+        Coh,z,grain_size,tm,a,x1,x2,length,width,thick,strike,dip,zs= map(float, line.split())
         n = 1.0
         A = 1e6
         #Coh = 2000 
@@ -17,9 +17,9 @@ def main():
         R = 8.3144
         G = 30e3
         pp = 3
-        d = 10000
+        d = grain_size
 
-        Tm = 1350          # in K ( K = c + 273)
+        Tm = tm
         Rm = 3330              # mantle density        (kg/m^3)
         Cp = 1171              # specific heat         (J/kg/K) 
         k = 3.138
@@ -30,7 +30,7 @@ def main():
         gamma0=((G**n)*A*(Coh**r)*(d**(-pp))* math.exp (-(Ea + p*Va)/(R*T)))
         if (not math.isnan(gamma0)):
             iIndex+=1
-            print("%d %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f" % (iIndex,gamma0,x1,x2,z,length,width,thick,strike,dip))
+            print("%d %.6f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f" % (iIndex,gamma0,x1,x2,z,length,width,thick,strike,dip))
             #print(x2,z,gamma0)
 
 if __name__ == "__main__":
