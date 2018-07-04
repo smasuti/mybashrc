@@ -48,7 +48,8 @@ and Phase Relations: A Handbook of Physical Constants
 polycrystalline olivine experimentally deformed at high pressure and 900°C
 24) Boioli, 2015, Modeling the creep
 properties of olivine by 2.5-dimensional dislocation dynamics simulations
-25) 
+25) Dorn, Some fundamental experiments on high temperature creep, 1954
+26) 
 
 Concepts to understand:
 -------------------------------------
